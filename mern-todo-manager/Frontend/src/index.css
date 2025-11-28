@@ -166,3 +166,61 @@ h3 {
 .gap-2 {
   gap: 0.5rem;
 }
+
+/* Responsive Utilities */
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Media Queries */
+/* Small devices (phones, less than 640px) */
+@media (max-width: 639px) {
+  .flex-col-sm {
+    flex-direction: column;
+  }
+  
+  .w-full-sm {
+    width: 100%;
+  }
+
+  .h1-sm {
+    font-size: 1.75rem;
+  }
+}
+
+/* Medium devices (tablets, 640px and up) */
+@media (min-width: 640px) {
+  .flex-row-md {
+    flex-direction: row;
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Extra Large devices (large desktops, 1280px and up) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+  }
+}

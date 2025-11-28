@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import TodoItem from '../components/TodoItem';
-import { FaPlus, FaCreditCard, FaSave, FaTimes } from 'react-icons/fa';
+import { FaPlus, FaSave, FaTimes } from 'react-icons/fa';
 
 const Dashboard = () => {
     const [todos, setTodos] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(true);
-    const [paymentStatus, setPaymentStatus] = useState('');
+
     const [editingTodo, setEditingTodo] = useState(null);
 
     const fetchTodos = async () => {
@@ -81,50 +81,31 @@ const Dashboard = () => {
         }
     };
 
-    const handlePayment = async () => {
-        try {
-            setPaymentStatus('Processing...');
-            const { data } = await api.post('/payment', { amount: 100 });
-            setPaymentStatus(`Success: ${data.message}`);
-            setTimeout(() => setPaymentStatus(''), 3000);
-        } catch (error) {
-            setPaymentStatus('Payment Failed');
-            setTimeout(() => setPaymentStatus(''), 3000);
-        }
-    };
+
 
     return (
         <div className="container">
             <div className="flex justify-between items-center mb-4">
                 <h1>My Tasks</h1>
-                <button onClick={handlePayment} className="btn" style={{ background: 'var(--success)', color: 'white' }}>
-                    <FaCreditCard style={{ marginRight: '0.5rem' }} /> Simulate Payment
-                </button>
             </div>
 
-            {paymentStatus && (
-                <div className="card mb-4" style={{ borderColor: 'var(--success)', color: 'var(--success)' }}>
-                    {paymentStatus}
-                </div>
-            )}
+
 
             <div className="card mb-4">
-                <form onSubmit={handleSubmit} className="flex gap-2">
+                <form onSubmit={handleSubmit} className="flex flex-col-sm flex-row-md gap-2">
                     <input
                         type="text"
-                        className="form-control"
+                        className="form-control flex-1"
                         placeholder="Task Title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        style={{ flex: 1 }}
                     />
                     <input
                         type="text"
-                        className="form-control"
+                        className="form-control flex-2"
                         placeholder="Description (Optional)"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        style={{ flex: 2 }}
                     />
                     <button type="submit" className="btn" style={{ background: editingTodo ? 'var(--warning)' : 'var(--primary)', color: 'white' }}>
                         {editingTodo ? <FaSave /> : <FaPlus />}
